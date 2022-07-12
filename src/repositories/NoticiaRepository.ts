@@ -18,7 +18,7 @@ class NoticiaRepository implements INoticiaRepository{
         return await Noticia.find({});
     }
     async obterPorId(id: string): Promise<NoticiaDocument> {
-        return await Noticia.findById(id);
+        return await Noticia.findOne({_id:id});
     }
     async obterPorTitulo(title: string): Promise<Boolean> {
         const noticia = await Noticia.findOne({title:title});

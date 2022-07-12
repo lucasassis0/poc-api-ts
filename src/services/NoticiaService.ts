@@ -25,11 +25,15 @@ class NoticiaService {
         return await this.noticiaRepository.obterPorId(id);
     }
     async deletar(id: string): Promise<NoticiaDocument>{
-        const noticiaDeletado = await this.noticiaRepository.deletar(id);
-        if(!noticiaDeletado){
-            throw new AppError("Noticia não encontrada !");
-        }
-        return noticiaDeletado;
+        let noticiaDeletada;
+        await this.noticiaRepository.deletar(id)
+        .then(res => {
+            noticiaDeletada = res;
+        })
+        .catch(err => {
+            throw new AppError("Noticia não encontrada!");
+        });
+        return noticiaDeletada;
     }
     async alterar({ id, title, description }: IRequest): Promise<NoticiaDocument> {
         return await this.noticiaRepository.alterar(id, title, description);

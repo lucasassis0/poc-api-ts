@@ -2,7 +2,7 @@ import { NoticiaDocument } from "../model/Noticia";
 
 interface ISalvarNoticiaDTO {
     title: string;
-    description: string
+    description: string;
 }
 
 interface INoticiaRepository {

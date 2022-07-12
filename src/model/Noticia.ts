@@ -2,7 +2,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose'
 
 export type NoticiaAtributes = {
     title: string;
-    description: string
+    description: string;
     create_at: Date;
     update_at: Date | undefined;
 }
@@ -29,5 +29,14 @@ const ProdutoSchema = new Schema({
     },
 });
 
+ProdutoSchema.virtual('id').get(function () {
+    return this._id.toHexString();
+});
+
+ProdutoSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc, ret) { delete ret._id }
+});
 
 export default mongoose.model<NoticiaDocument, NoticaModel>('Noticia', ProdutoSchema);

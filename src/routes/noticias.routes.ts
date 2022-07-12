@@ -20,14 +20,14 @@ noticiasRoutes.get('/noticias', async (request, response) => {
     const listarNoticias = await noticiaService.obterTodos();
     return response.json(listarNoticias);
 });
-noticiasRoutes.get('/noticias/pesquisa', async (request, response) => {
-    const { id } = request.query;
+noticiasRoutes.get('/noticias/:id', async (request, response) => {
+    const id = request.params.id;
     const noticiaService = new NoticiaService(noticiaRepository);
     const noticia = await noticiaService.obterPorId(id as string);
     return response.json(noticia);
 });
-noticiasRoutes.delete("/noticias", async (request, response) => {
-    const { id } = request.query;
+noticiasRoutes.delete("/noticias/:id", async (request, response) => {
+    const id = request.params.id;
     const noticiaService = new NoticiaService(noticiaRepository);
     const  noticiaDeletada = await noticiaService.deletar(id as string);
     return response.status(200).json({
